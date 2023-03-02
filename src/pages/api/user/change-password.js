@@ -1,5 +1,5 @@
 import { connectToDatabase } from '/utils/db';
-import { verifyPassword } from '../../../../../utils/auth';
+import { verifyPassword } from '../../../../utils/auth';
 import { getSession } from 'next-auth/client';
 import { hashPassword } from '/utils/auth';
 
@@ -7,11 +7,11 @@ async function handler(req, res) {
 	if (req.method !== 'PATCH') {
 		return;
 	}
-
+	console.log(req.body);
 	const session = await getSession({ req: req });
 
 	if (!session) {
-		res.status(4001).json({ message: 'not authenticated!' });
+		res.status(401).json({ message: 'not authenticated!' });
 		return;
 	}
 
